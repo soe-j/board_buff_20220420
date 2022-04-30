@@ -1,8 +1,10 @@
 import 'package:bloc_provider/bloc_provider.dart';
+import 'package:board_buff_20220420/blocs/zenn_articles_bloc.dart';
 import 'package:board_buff_20220420/page1.dart';
 import 'package:board_buff_20220420/page1_bloc.dart';
 import 'package:board_buff_20220420/page2.dart';
 import 'package:board_buff_20220420/page2_bloc.dart';
+import 'package:board_buff_20220420/pages/zenn_article_list_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -127,6 +129,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     builder: (context) => BlocProvider(
                       creator: (context, _) => Page2Bloc(),
                       child: const Page2(),
+                    ),
+                  ),
+                );
+              },
+            ),
+            ElevatedButton(
+              child: const Text("Zenn"),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BlocProvider(
+                      creator: (context, _) => ZennArticlesBloc(),
+                      child: const ZennArticleListPage(),
                     ),
                   ),
                 );
