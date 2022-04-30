@@ -30,12 +30,21 @@ class _ZennArticleListPageState extends State<ZennArticleListPage> {
         body: StreamBuilder<List<ZennArticle>>(
           stream: _bloc.articleListStream,
           builder: (context, snapshot) {
-            final data = snapshot.data ?? [];
+            final articles = snapshot.data ?? [];
 
-            return ListView.builder(
-              itemCount: data.length,
+            return ListView.separated(
+              separatorBuilder: (context, index) =>
+                  const Divider(height: 1, thickness: 1),
+              itemCount: articles.length,
               itemBuilder: (context, index) {
-                return Text(data[index].title);
+                final article = articles[index];
+                return ListTile(
+                  leading:
+                      Text(article.emoji, style: const TextStyle(fontSize: 24)),
+                  title: Text(article.title,
+                      style: const TextStyle(color: Colors.black87)),
+                  subtitle: Text(article.publishedAt.toIso8601String()),
+                );
               },
             );
           },
